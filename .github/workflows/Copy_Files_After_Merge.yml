@@ -1,0 +1,19 @@
+name: Copy Files After Merge
+
+on:
+  push:
+    branches:
+      - main  # or the branch you're merging into
+
+jobs:
+  copy-files:
+    runs-on: windows-latest  # Use a Windows runner
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Copy files using xcopy
+        run: |
+          # Using xcopy to copy files (adjust source and destination paths as needed)
+          xcopy "C:\path\to\your\source\*" "C:\path\to\your\destination\" /s /e /h /y

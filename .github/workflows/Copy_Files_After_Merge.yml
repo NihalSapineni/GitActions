@@ -15,5 +15,6 @@ jobs:
 
       - name: Copy files using xcopy
         run: |
-          xcopy "\\192.168.0.237\C$\A\*" "\\192.168.0.237\C$\B\" /s /e /h /y
+          net use P: \\computer1\192.168.0.237\c$
+          xcopy xcopy "P:\A\*" "P:\B\" /s /e /h /y
         shell: cmd

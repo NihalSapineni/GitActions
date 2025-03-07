@@ -15,5 +15,5 @@ jobs:
 
       - name: Copy files using xcopy
         run: |
-          xcopy "C:\A\*" "C:\B\" /s /y
+          xcopy "E:\\GIT\\GitActions\\source\\*" "E:\\GIT\\GitActions\\destination\\" /y
         shell: cmd

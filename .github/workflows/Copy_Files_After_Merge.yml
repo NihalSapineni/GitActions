@@ -15,6 +15,4 @@ jobs:
 
       - name: Copy files using xcopy
         run: |
-          # Using xcopy to copy files (adjust source and destination paths as needed)
-          net use x: \\E:\GIT\GitActions
-          xcopy "X:\source\*" "X:\destination\" /s /e /h /y
+          xcopy "E:\\GIT\\GitActions\\source\\*" "E:\\GIT\\GitActions\\destination\\" /s /e /h /y

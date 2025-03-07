@@ -15,5 +15,5 @@ jobs:
 
       - name: Copy files using xcopy
         run: |
-          xcopy "C:\A\*.*" "C:\B\" /s /e /h /y
+          xcopy "C:\A\*" "C:\B\" /s /y
         shell: cmd

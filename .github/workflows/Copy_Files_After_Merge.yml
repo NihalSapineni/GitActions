@@ -17,5 +17,5 @@ jobs:
         run: |
           $sourcePath = "D:\A"
           $destinationPath = "D:\B"
-          robocopy $sourcePath $destinationPath /E
+          xcopy $sourcePath $destinationPath 
         shell: pwsh        

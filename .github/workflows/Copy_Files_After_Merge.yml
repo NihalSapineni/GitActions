@@ -13,9 +13,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Copy files using xcopy
+      - name: Copy files using robocopy
         run: |
-          $sourcePath = "C:\A"
-          $destinationPath = "C:\B"
+          $sourcePath = "D:\A"
+          $destinationPath = "D:\B"
           robocopy $sourcePath $destinationPath /E
         shell: pwsh        

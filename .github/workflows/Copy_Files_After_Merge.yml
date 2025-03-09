@@ -18,4 +18,4 @@ jobs:
           $sourcePath = "D:\A"
           $destinationPath = "D:\B\"
           xcopy $sourcePath $destinationPath /E /H /Y
-        shell: pwsh        
+        shell: cmd        

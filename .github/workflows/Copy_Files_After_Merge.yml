@@ -1,18 +1,31 @@
-name: Copy Files After Merge
+name: Copy Files to Physical Machine via WinRM
 
 on:
   push:
     branches:
-      - main  # or the branch you're merging into
+      - main
 
 jobs:
   copy-files:
-    runs-on: windows-latest  # Use a Windows runner
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Copy files using xcopy
+      - name: Copy files to physical machine
+        env:
+          WINRM_USER: ${{ secrets.WINRM_USER }}
+          WINRM_PASSWORD: ${{ secrets.WINRM_PASSWORD }}
+          WINRM_HOST: ${{ secrets.WINRM_HOST }}
+          SOURCE_DIR: 'path/to/source/directory'
+          DESTINATION_DIR: 'C:\\path\\to\\destination\\directory'
         run: |
-          xcopy "D:\\A\*" "D:\\B\" /s /e /h /y
+          pwsh -Command "
+            $username = '${WINRM_USER}'
+            $password = ConvertTo-SecureString '${WINRM_PASSWORD}' -AsPlainText -Force
+            $cred = New-Object System.Management.Automation.PSCredential ($username, $password)
+            Invoke-Command -ComputerName '${WINRM_HOST}' -Credential $cred -ScriptBlock {
+              param(\$sourceDir, \$destinationDir)
+              xcopy /s /i /y \$sourceDir \$destinationDir
+            } -ArgumentList '${SOURCE_DIR}', '${DESTINATION_DIR}'
+          "

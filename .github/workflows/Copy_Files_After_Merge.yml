@@ -15,5 +15,7 @@ jobs:
 
       - name: Copy files using xcopy
         run: |
-          xcopy "P:\A\*" "P:\B\" /s /e /h /y
-        shell: cmd
+          $sourcePath = "C:\A"
+          $destinationPath = "C:\B"
+          robocopy $sourcePath $destinationPath /E
+        shell: pwsh        

@@ -3,7 +3,7 @@ name: Copy Files After Merge
 on:
   push:
     branches:
-      - main  # or the branch you're merging into 
+      - main  # or the branch you're merging into  
 
 jobs:
   copy-files:

@@ -3,7 +3,7 @@ name: Copy Files After Merge
 on:
   push:
     branches:
-      - main  # or the branch you're merging into   
+      - main  # or the branch you're merging into
 
 jobs:
   copy-files:
@@ -13,9 +13,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Copy files using robocopy
+      - name: Copy files using xcopy
         run: |
-          $sourcePath = "D:\A"
-          $destinationPath = "D:\B\"
-          xcopy $sourcePath $destinationPath /E /H /Y
-        shell: cmd        
+          xcopy "E:\\GIT\\GitActions\\source\\*" "E:\\GIT\\GitActions\\destination\\" /s /e /h /y
+          shell: cmd

@@ -15,7 +15,7 @@ jobs:
 
       - name: Copy files using robocopy
         run: |
-          $sourcePath = "D:\A"
-          $destinationPath = "D:\B"
+          $sourcePath = "D:\A\"
+          $destinationPath = "D:\B\"
           xcopy $sourcePath $destinationPath 
         shell: pwsh        

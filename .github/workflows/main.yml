@@ -3,7 +3,7 @@ name: Copy Files to Windows Machine
 on:
   push:
     branches:
-      - main  # Trigger the workflow when pushing to the main branch
+      - main  # Trigger the workflow when pushing to the main branch 
 
 jobs:
   copy-files:

@@ -1,0 +1,24 @@
+name: github action to copy a file from one repo to another
+
+on:
+  push:
+    branches:
+      - main  # or the branch you're merging into
+
+jobs:
+  copy-files:
+    runs-on: windows-latest  # Use a Windows runner
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Copy files using xcopy
+        run: |
+          git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/project target
+          rm everything but the .git directory
+          copy source\files target
+          cd target
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Automatic publish from github.com/project"
+          git push target master

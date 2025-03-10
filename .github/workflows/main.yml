@@ -26,5 +26,5 @@ jobs:
       # Step 3: Copy Files to the Windows Machine via SCP
       - name: Copy Files to Windows Machine
         run: |
-          scp -r ./path/to/your/files ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/path/to/destination/directory
+          scp -r https://github.com/NihalSapineni/GitActions/tree/main/source/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:E$\GIT\GitActions\destination
         shell: pwsh

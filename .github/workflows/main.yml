@@ -11,7 +11,6 @@ jobs:
     steps:
     - name: Install SSH Keys
       run: |
-        mkdir $secrets:SSH_USER\.ssh
         $secrets:SSH_PRIVATE_KEY | Out-File -FilePath "$secrets:SSH_USER\.ssh\id_rsa" -Encoding ascii
         icacls "$secrets:SSH_USER\.ssh\id_rsa" /inheritance:r /grant:r "$secrets:SSH_USER:(R,W)"
         ssh-keyscan -H ${{ secrets.SSH_HOST }} | Out-File -FilePath "$secrets:SSH_USER\.ssh\known_hosts" -Encoding ascii

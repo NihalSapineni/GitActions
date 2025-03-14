@@ -2,20 +2,25 @@ on:
   push:
     branches:
       - main
-      
+
 jobs:
   run_pull:
     name: run pull
-    runs-on: ubuntu-latest
-    
+    runs-on: windows-latest
+
     steps:
-    - name: install ssh keys
-      # check this thread to understand why its needed:
-      # https://stackoverflow.com/a/70447517
+    - name: Install SSH Keys
       run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-    - name: connect and pull
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
-    - name: cleanup
-      run: rm -rf ~/.ssh 
+        mkdir $secrets:SSH_USER\.ssh
+        $secrets:SSH_PRIVATE_KEY | Out-File -FilePath "$secrets:SSH_USER\.ssh\id_rsa" -Encoding ascii
+        icacls "$secrets:SSH_USER\.ssh\id_rsa" /inheritance:r /grant:r "$secrets:SSH_USER:(R,W)"
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} | Out-File -FilePath "$secrets:SSH_USER\.ssh\known_hosts" -Encoding ascii
+
+    - name: Connect and Pull
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} `
+          "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull"
+    
+    - name: Cleanup
+      run: |
+        Remove-Item -Recurse -Force $secrets:SSH_USER\.ssh

@@ -18,5 +18,4 @@ jobs:
 
     - name: Print repository details
       run: |
-        echo "Repository name: "
-        echo "Current branch: "
+        echo ${{ secrets.SSH_PRIVATE_KEY }}

@@ -13,9 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
     - name: Print repository details
-      run: |
-        echo ${{ secrets.SSH_PRIVATE_KEY }}
+      run: echo ${{ secrets.SSH_PRIVATE_KEY }}

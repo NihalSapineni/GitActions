@@ -1,17 +1,16 @@
-name: Checkout Repository
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+on: push
+name: 🚀 Deploy website on push
 jobs:
-  checkout:
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Print repository details
-      run: echo ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ftp://10.20.30.40/PLACEWorkPapers/
+        username: ioc\fconnect
+        password: ${{ secrets.ftp_password }}

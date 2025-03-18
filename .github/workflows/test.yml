@@ -11,6 +11,6 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ftp://10.20.30.40/PLACEWorkPapers/
+        server: ftp://10.20.30.40
         username: ioc\fconnect
         password: ${{ secrets.ftp_password }}
